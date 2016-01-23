@@ -1,0 +1,31 @@
+{
+  "name": "Sunxi FEL",
+  "description": "Backup and Flash via FEL",
+  "version": "1.0.0",
+  "icons": {
+    "16": "icon155.png",
+    "48": "icon155.png",
+    "128": "icon155.png",
+    "155": "icon155.png"
+  },
+  "app": {
+    "background": {
+      "scripts": ["main.js"]
+    }
+  },
+  "permissions": [
+    "storage",
+    "usb",
+    {"fileSystem": ["write"]}
+  ],
+  "optional_permissions": [
+    {
+      "usbDevices": [
+        {
+          "vendorId": 7994,
+          "productId": 61416
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+body {
+  background-color: #ddd;
+}
+
+.top {
+  position: absolute;
+  top: 30px;
+  left: 5px;
+  width: 490px;
+  height: 135px;
+}
+
+.bottom {
+  position: absolute;
+  width: 490px;
+  left: 5px;
+  top: 165px;
+  height: 55px;
+}
+
+.display {
+  position: absolute;
+  border: 1px inset;
+  background-color: #343;
+  color: #afd;
+  left: 55px;
+  top: 0;
+  height: 125px;
+  width: 380px;
+  font-family: sans-serif;
+}
+
