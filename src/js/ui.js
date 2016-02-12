@@ -10,14 +10,14 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App/>, document.getElementById('app'));
-
+/*
 chrome.usb.findDevices({vendorId:0x1f3a,productId:0xefe8},function(devices){
   console.log(devices, chrome.runtime.lastError ? chrome.runtime.lastError.message : undefined);
   chrome.usb.listInterfaces( devices[0], function(info){
     console.log(info, chrome.runtime.lastError ? chrome.runtime.lastError.message : undefined);
   });
 })
-
+*/
 chrome.usb.getDevices({},function(devices){
    if( devices.length > 0 ) {
       chrome.usb.openDevice(devices[0], function(handle) {
