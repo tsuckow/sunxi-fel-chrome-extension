@@ -1,11 +1,19 @@
-require("styles/ui.css")
+require('styles/ui.css');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import DeviceSelector from 'components/deviceSelector.jsx';
+
+import usb from 'services/usb.js';
+
 class App extends React.Component {
+  componentDidMount() {
+    setInterval(usb.checkForDevices.bind(usb),1000);
+  }
+
   render() {
-    return <h1>Hello</h1>
+    return <DeviceSelector />;
   }
 }
 
