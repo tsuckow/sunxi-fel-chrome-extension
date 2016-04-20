@@ -1,9 +1,9 @@
-require('styles/ui.css');
+require('styles/ui.less');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import DeviceSelector from 'components/deviceSelector.jsx';
+import Searching from 'views/searching.jsx';
 
 import usb from 'services/usb.js';
 
@@ -13,7 +13,7 @@ class App extends React.Component {
   }
 
   render() {
-    return <DeviceSelector />;
+    return <Searching />;
   }
 }
 

@@ -11,8 +11,8 @@ chrome.app.runtime.onLaunched.addListener(function() {
       'height': 225
     },
     'resizable': false,
-    /*'frame': {
-      'color':'#343'
-    }*/
+    'frame': {
+      'color':'#FFF'
+    }
   });
 });

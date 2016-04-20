@@ -23,8 +23,8 @@ export default class DeviceSelector extends React.Component {
 
   render() {
     const devices = _.map(this.state.devices, (d) => {
-      const vendor = d.vendorId.toString(16);
-      const product = d.productId.toString(16);
+      const vendor = d.vendorId.toString(16).toUpperCase();
+      const product = d.productId.toString(16).toUpperCase();
       return <div key={d.device}>{d.device + ' - ' + vendor + ' ' + product}</div>;
     });
 
