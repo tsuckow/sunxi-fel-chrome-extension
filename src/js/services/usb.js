@@ -1,14 +1,10 @@
 import _ from 'lodash';
 
-import Enum from 'utils/enum.js';
-import EventEmitter from 'utils/eventEmitter.js';
+import dispatcher from 'dispatcher.js';
 
-const States = new Enum('RESET','');
 
-class USB extends EventEmitter {
+class USB {
   constructor() {
-    super();
-    this.state = States.RESET;
     this.knownDevices = [];
   }
 
@@ -22,7 +18,7 @@ class USB extends EventEmitter {
       //const removed = _.difference(this.knownDevices,devices);
       if(!_.isEqual(this.knownDevices, devices)) {
         this.knownDevices = devices;
-        this.emit('change', devices);
+        dispatcher.dispatch({ actionType: 'devices-change', devices: devices });
       }
     });
   }

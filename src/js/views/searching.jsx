@@ -2,33 +2,39 @@ import React from 'react';
 
 import 'styles/searching.less';
 
-import usb from 'services/usb.js';
+import appState from 'stores/appState.js';
 
 import Scanner from 'components/scanner.jsx';
 
 export default class Searching extends React.Component {
   constructor() {
     super();
-    this.state = { devices: usb.getDevices() };
+    this.state = { searching: appState.isSearching(), foundFEL: appState.isFoundFEL() };
 
-    this.onDevices = this.onDevices.bind(this);
-    usb.on('change', this.onDevices);
+    this.onAppStateChanged = this.onAppStateChanged.bind(this);
+    this.onAppStateChanged.bind(this);
+
+    appState.on('changed',this.onAppStateChanged);
   }
 
   componentWillUnmount() {
-    usb.off('change', this.onDevices);
+    appState.off('changed', this.onAppStateChanged);
   }
 
-  onDevices(devices) {
-    this.setState({ devices: devices });
+  onAppStateChanged() {
+    this.setState({ searching: appState.isSearching(), foundFEL: appState.isFoundFEL() });
   }
 
   render() {
-    let message = this.state.devices.length?'Found C.H.I.P.':'Searching for C.H.I.P.';
+    let message = (!this.state.searching)?'Found C.H.I.P.':'Searching for C.H.I.P.';
+    let felButton = this.state.foundFEL?<button type="button">Connect &amp; Initialize</button>:null;
 
     return <div className="searching">
-      <Scanner loaded={!!this.state.devices.length} />
-      <span>{message}</span>
+      <Scanner loaded={!this.state.searching} />
+      <div>
+        <span className="message">{message}</span>
+        <div className="buttons">{felButton}</div>
+      </div>
     </div>;
   }
 }
