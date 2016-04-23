@@ -6,10 +6,18 @@ import appState from 'stores/appState.js';
 
 import Scanner from 'components/scanner.jsx';
 
+function getState() {
+  return {
+    searching: appState.isSearching(),
+    foundFEL: appState.isFoundFEL(),
+    tooMany: appState.isTooManyDevices(),
+  };
+}
+
 export default class Searching extends React.Component {
   constructor() {
     super();
-    this.state = { searching: appState.isSearching(), foundFEL: appState.isFoundFEL() };
+    this.state = getState();
 
     this.onAppStateChanged = this.onAppStateChanged.bind(this);
     this.onAppStateChanged.bind(this);
@@ -22,15 +30,22 @@ export default class Searching extends React.Component {
   }
 
   onAppStateChanged() {
-    this.setState({ searching: appState.isSearching(), foundFEL: appState.isFoundFEL() });
+    this.setState(getState());
   }
 
   render() {
-    let message = (!this.state.searching)?'Found C.H.I.P.':'Searching for C.H.I.P.';
-    let felButton = this.state.foundFEL?<button type="button">Connect &amp; Initialize</button>:null;
+    let message = 'Unknown Error';
+    if( this.state.tooMany ) {
+      message = 'Too many devices\nOne device at a time';
+    } else if( this.state.searching ) {
+      message = 'Searching for C.H.I.P.';
+    } else {
+      message = 'Found C.H.I.P.';
+    }
+    let felButton = (this.state.foundFEL && !this.state.tooMany)?<button type="button">Connect &amp; Initialize</button>:null;
 
     return <div className="searching">
-      <Scanner loaded={!this.state.searching} />
+      <Scanner loaded={!this.state.searching} error={this.state.tooMany} />
       <div>
         <span className="message">{message}</span>
         <div className="buttons">{felButton}</div>

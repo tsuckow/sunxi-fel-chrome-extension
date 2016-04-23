@@ -19,6 +19,7 @@ class USB {
       if(!_.isEqual(this.knownDevices, devices)) {
         this.knownDevices = devices;
         dispatcher.dispatch({ actionType: 'devices-change', devices: devices });
+        console.log('Devices', devices);
       }
     });
   }

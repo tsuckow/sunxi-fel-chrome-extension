@@ -26,6 +26,7 @@ chrome.usb.findDevices({vendorId:0x1f3a,productId:0xefe8},function(devices){
   });
 })
 */
+/*
 chrome.usb.getDevices({},function(devices){
    if( devices.length > 0 ) {
       chrome.usb.openDevice(devices[0], function(handle) {
@@ -38,6 +39,7 @@ chrome.usb.getDevices({},function(devices){
          chrome.usb.listInterfaces( handle, function(info){
            console.log(info, chrome.runtime.lastError ? chrome.runtime.lastError.message : undefined);
          });
+*/
 /*
          chrome.usb.claimInterface( handle, 0,  function(info){
            console.log(info, chrome.runtime.lastError ? chrome.runtime.lastError.message : undefined);
@@ -89,8 +91,9 @@ chrome.usb.getDevices({},function(devices){
            })
          })
 */
-
+/*
       });
    }
    console.log("Devices",devices, chrome.runtime.lastError ? chrome.runtime.lastError.message : undefined);
 });
+*/
