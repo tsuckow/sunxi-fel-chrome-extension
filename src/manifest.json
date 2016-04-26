@@ -1,7 +1,9 @@
 {
-  "name": "Sunxi FEL",
-  "description": "Backup and Flash via FEL",
-  "version": "1.0.0",
+  "manifest_version": 2,
+  "name": "C.H.I.P. Backup & Restore",
+  "short_name": "C.H.I.P. Backup",
+  "description": "Backup and Restore C.H.I.P images",
+  "version": "0.1.0",
   "icons": {
     "16": "icon155.png",
     "48": "icon155.png",
@@ -22,6 +24,10 @@
         {
           "vendorId": 7994,
           "productId": 61416
+        },
+        {
+          "vendorId": 6353,
+          "productId": 4112
         }
       ]
     }

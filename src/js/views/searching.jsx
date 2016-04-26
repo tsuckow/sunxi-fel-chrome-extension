@@ -4,6 +4,8 @@ import 'styles/searching.less';
 
 import appState from 'stores/appState.js';
 
+import usbActions from 'actions/usbActions.js';
+
 import Scanner from 'components/scanner.jsx';
 
 function getState() {
@@ -33,6 +35,10 @@ export default class Searching extends React.Component {
     this.setState(getState());
   }
 
+  onFelInit() {
+    usbActions.programFel();
+  }
+
   render() {
     let message = 'Unknown Error';
     if( this.state.tooMany ) {
@@ -42,7 +48,7 @@ export default class Searching extends React.Component {
     } else {
       message = 'Found C.H.I.P.';
     }
-    let felButton = (this.state.foundFEL && !this.state.tooMany)?<button type="button">Connect &amp; Initialize</button>:null;
+    let felButton = (this.state.foundFEL && !this.state.tooMany)?<button type="button" onClick={this.onFelInit}>Connect &amp; Initialize</button>:null;
 
     return <div className="searching">
       <Scanner loaded={!this.state.searching} error={this.state.tooMany} />

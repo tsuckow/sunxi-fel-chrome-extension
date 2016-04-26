@@ -9,7 +9,9 @@ import usb from 'services/usb.js';
 
 class App extends React.Component {
   componentDidMount() {
-    setInterval(usb.checkForDevices.bind(usb),1000);
+    chrome.usb.onDeviceAdded.addListener(() => usb.checkForDevices());
+    chrome.usb.onDeviceRemoved.addListener(() => usb.checkForDevices());
+    setTimeout(usb.checkForDevices.bind(usb),500);
   }
 
   render() {

@@ -5,7 +5,7 @@ import EventEmitter from 'utils/eventEmitter.js';
 
 import dispatcher from 'dispatcher.js';
 
-const States = new Enum('SEARCHING','FOUND_FEL','FOUND_FASTBOOT','BACKUP','RESTORE');
+const States = new Enum('SEARCHING','FOUND_FEL','BOOT','FOUND_FASTBOOT','BACKUP','RESTORE');
 
 class AppState extends EventEmitter {
   constructor() {
@@ -42,8 +42,8 @@ class AppState extends EventEmitter {
         this.state = States.SEARCHING;
         this.tooMany = true;
         this.emit('changed');
-      } else if( action.devices.length === 1 && this.state === States.SEARCHING ) {
-        this.state = States.FOUND_FEL;
+      } else if( action.devices.length === 1 && this.isState([States.SEARCHING,States.FOUND_FEL,States.FOUND_FASTBOOT])) {
+        this.state = (action.devicesFel.length > 0)?States.FOUND_FEL:States.FOUND_FASTBOOT;
         this.tooMany = false;
         this.emit('changed');
       }
